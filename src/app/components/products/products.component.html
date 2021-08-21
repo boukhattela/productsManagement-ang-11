@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar navbar-nav">
+        <li>
+            <button (click)="ongetAllProducts()" class="btn btn-outline-info mr-6">All</button>
+        </li>
+       <li>
+            <button (click)="ongetAvailableProducts()" class="btn btn-outline-info mr-6">Available</button>
+        </li>
+        <li>
+            <button (click)="ongetSelectedProducts()" class="btn btn-outline-info mr-6">Selected</button>
+        </li>
+        <li>
+          <button (click)="onNewProducts()" class="btn btn-outline-info mr-6">New Product</button>
+      </li>
+
+
+
+
+    </ul>
+    <ul class="navbar navbar-nav ml-auto ">
+      <li>
+
+          <form #f='ngForm' (ngSubmit)="OnSearch(f.value)">
+            <div class="form-group">
+              <input ngModel name="keyword"  type="text">
+              <button class="btn btn-outline-info">
+                <span class="fa fa-search"></span>
+              </button>
+
+            </div>
+          </form>
+
+      </li>
+    </ul>
+
+</nav><div class="container">
+<ng-container *ngIf="products$ | async as result" [ngSwitch]="result.dataState">
+<ng-container  *ngSwitchCase="DataStateEnum.LOADING">
+  loading.............
+</ng-container>
+<ng-container  *ngSwitchCase="DataStateEnum.LOADED">
+  <table class="table">
+
+    <tr><th>Id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Selected</th><th>Available</th></tr>
+    <tr *ngFor="let p of result.data">
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.quantity}}</td>
+        <td>{{p.selected}}</td>
+        <td>{{p.available}}</td>
+        <td><button type="button" (click)="onSelect(p)" [ngClass]="p.selected?'btn btn-warning btn-lg active':'btn btn-primary btn-lg active'" class="btn btn-sm">
+          <span *ngIf="p.selected">Unselect</span>
+          <span *ngIf="!p.selected">select</span>
+        </button></td>
+
+        <td><button type="button" class="btn btn-danger btn-lg active btn btn-sm" (click)="onDelete(p)">
+          <span class="fa fa-trash-o"></span>
+delete
+        </button></td>
+        <td><button type="button" class="btn btn-danger btn-lg active btn btn-sm" (click)="onEditProducts(p)">
+          <span class="fa fa-edit-o"></span>
+Edit
+        </button></td>
+
+    </tr>
+</table>
+</ng-container>
+<ng-container *ngSwitchCase="DataStateEnum.ERROR">
+ <div class="alert-danger">
+   {{result.errorMessage}}
+ </div>
+</ng-container>
+
+
+
+
+
+</ng-container>
+<div class="container" *ngIf="products$">
+
+</div>
+</div>
+

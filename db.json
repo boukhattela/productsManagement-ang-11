@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 2,
+      "name": "printer",
+      "price": "3005",
+      "quantity": 100,
+      "selected": true,
+      "available": true
+    },
+    {
+      "name": "smartphone",
+      "price": "125",
+      "quantity": 100,
+      "selected": true,
+      "available": true,
+      "id": 3
+    },
+    {
+      "id": 1,
+      "name": "computer",
+      "price": 4500,
+      "quantity": 600,
+      "selected": true,
+      "available": true
+    },
+    {
+      "name": "seche-main",
+      "price": "30",
+      "quantity": "88",
+      "selected": true,
+      "available": true,
+      "id": 4
+    }
+  ]
+}
